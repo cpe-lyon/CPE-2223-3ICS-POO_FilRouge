@@ -16,10 +16,17 @@ On a typical, standard Debian (or Ubuntu) linux distro, use the following paths 
     "java.configuration.runtimes": [
         {
             "name": "JavaSE-11",
+            "path": "/softwares/sync/zulu11.50.19-ca-fx-jdk11.0.12-linux_x64",
+            "sources": "/usr/lib/jvm/java-11-openjdk-amd64/lib/src.zip", /* FIXME */
+            "javadoc": "/usr/share/doc/openjdk-8-doc/api/index.html", /* FIXME */
+            "default": true
+        },
+        {
+            "name": "JavaSE-11",
             "path": "/usr/lib/jvm/java-11-openjdk-amd64",
             "sources": "/usr/lib/jvm/java-11-openjdk-amd64/lib/src.zip",
             "javadoc": "/usr/share/doc/openjdk-8-doc/api/index.html",
-            "default": true
+            "default": false
         },
         {
             "name": "JavaSE-1.8",
