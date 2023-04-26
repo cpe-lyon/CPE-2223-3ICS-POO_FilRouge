@@ -1,13 +1,13 @@
 package model;
 
-
+import java.util.Objects;
 
 /**
  * @author francoiseperrin
  *
  * Coordonnées des PieceModel
  */
-public class Coord implements Comparable<Coord>{
+public class Coord implements Comparable<Coord> {
 	
 	private char colonne; 	// ['a'..'j']
 	private int ligne;		// [10..1]
@@ -27,26 +27,36 @@ public class Coord implements Comparable<Coord>{
 		return ligne;
 	}
 
-
 	@Override
 	public String toString() {
-		return "["+ligne + "," + colonne + "]";
+		return "["+ colonne + "," + ligne + "]";
 	}
-
 
 	/**
 	 * @param coord
 	 * @return true si 'a' <= col < 'a'+MAX et 1 < lig <= MAX
 	 */
 	public static boolean coordonnees_valides(Coord coord){
-
-		boolean ret = false;
-
-		// TODO Atelier 1
-		
-		return ret;
+		return ((coord.colonne >= 'a' && coord.colonne < 'a' + MAX) && (coord.ligne >= 1 && coord.ligne <= MAX));
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == this) return true;
+		if (obj == null) return false;
+		if (!(obj instanceof Coord)) return false;
+		Coord other = (Coord) obj;
+		return (this.colonne == other.colonne && this.ligne == other.ligne);
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31; // prime number > MAX (avoid hash collision)
+		int result = 1;
+		result = prime * result + ligne;
+		result = prime * result + colonne;
+		return result;
+	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
@@ -58,12 +68,9 @@ public class Coord implements Comparable<Coord>{
 	 * ainsi le N° 1 correspond à la Coord ['a', 10], le N° 100 correspond à la Coord ['j', 1]  
 	 */
 	@Override
-	public int compareTo(Coord o) {
-		int ret = 999;
-		
-		// TODO Atelier 1
-		
-		return ret ;
+	public int compareTo(Coord obj) {
+		int thisNum = (this.ligne - 1) * 10 + (this.colonne - 'a');
+		int otherNum = (obj.ligne - 1) * 10 + (obj.colonne - 'a');
+		return Integer.compare(otherNum, thisNum);
 	}
-
 }
