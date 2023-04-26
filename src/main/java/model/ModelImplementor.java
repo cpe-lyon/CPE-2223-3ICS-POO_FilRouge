@@ -20,47 +20,40 @@ import nutsAndBolts.PieceSquareColor;
 public class ModelImplementor {
 
 	// la collection de pièces en jeu - mélange noires et blanches
-	private Collection<PieceModel> pieces ;	
+	private Collection<PieceModel> pieces ;
 
 	public ModelImplementor() {
 		super();
-
 		pieces = ModelFactory.createPieceModelCollection();
 	}
 
 	public PieceSquareColor getPieceColor(Coord coord) {
-		PieceSquareColor color = null;
-
-		// TODO Atelier 1
-		
-		return color;
+		PieceModel piece = findPiece(coord);
+		if (piece == null) return null;
+		return piece.getPieceColor();
 	}
 
 	public boolean isPiecehere(Coord coord) {
-		boolean isPiecehere = false;
-
-		// TODO Atelier 1
-		
-		return isPiecehere;
+		return this.findPiece(coord) != null;
 	}
 
 	public boolean isMovePieceOk(Coord initCoord, Coord targetCoord, boolean isPieceToTake) {
 
-		boolean isMovePieceOk = false;
-
-		// TODO Atelier 1
-		
-		return isMovePieceOk;
+		PieceModel pieceToMove = this.findPiece(initCoord);
+		if (pieceToMove == null) return false;
+		return pieceToMove.isMoveOk(targetCoord, isPieceToTake);
 	}
 
 
 	public boolean movePiece(Coord initCoord, Coord targetCoord) {
 
-		boolean isMovePieceDone = false;
+		PieceModel pieceToMove = this.findPiece(initCoord);
+		if (pieceToMove == null) return false;
+		PieceModel movedPiece = new PawnModel(targetCoord, pieceToMove.getPieceColor());
+		this.pieces.add(movedPiece);
+		this.pieces.remove(pieceToMove);
 
-		// TODO Atelier 1
-		
-		return isMovePieceDone;
+		return true;
 	}
 
 	public void removePiece(Coord pieceToTakeCoord) {
@@ -84,12 +77,10 @@ public class ModelImplementor {
 	 * @return la pièce qui se trouve aux coordonnées indiquées
 	 */
 	 PieceModel findPiece(Coord coord) {		// TODO : mettre en "private" après test unitaires
-		 
-		PieceModel findPiece = null;
-
-		// TODO Atelier 1
-		
-		return findPiece;
+		 for (PieceModel piece : this.pieces) {
+			 if (piece.hasThisCoord(coord)) return piece;
+		 }
+		 return null;
 	}
 
 

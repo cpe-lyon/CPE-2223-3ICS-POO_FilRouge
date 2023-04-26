@@ -66,12 +66,7 @@ public class PawnModel implements PieceModel{
 	 */
 	@Override
 	public String toString() {
-		String st = null;
-
-		// TODO Atelier 1
-		st = "Couleur : " + this.getPieceColor() +  " Coord : " + this.coord.toString()  ;
-
-		return st;
+		return "[" + pieceColor.toString().charAt(0) + coord + "]";
 	}
 
 	@Override
