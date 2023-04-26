@@ -69,8 +69,8 @@ public class Coord implements Comparable<Coord> {
 	 */
 	@Override
 	public int compareTo(Coord obj) {
-		int thisNum = (this.ligne - 1) * 10 + (this.colonne - 'a');
-		int otherNum = (obj.ligne - 1) * 10 + (obj.colonne - 'a');
+		int thisNum = (MAX - this.ligne) * 10 + (this.colonne - 'a');
+		int otherNum = (MAX - obj.ligne) * 10 + (obj.colonne - 'a');
 		return Integer.compare(otherNum, thisNum);
 	}
 }
